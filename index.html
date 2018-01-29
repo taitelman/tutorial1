@@ -11,34 +11,90 @@
 </head>
 
 <body>
-
-<div class="container">
-<div class="row" id="topheader">
-  <div class="col-sm-8">
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
+  <div class="col-sm-4">
     <span/>
   </div>
   <div class="col-sm-2">
     <label for="numOfConversations">Number of conv:</label>
     <input id="numOfConversations" type="range" min="0" max="100" step="10" onchange="numOfConvChanged(value)">
-<!--
-    <output id="convNumMin">0</output>
-    <output id="convNumMax">1352</output>
-  -->
   </div>
   <div class="col-sm-2">
     <label for="dominancy">dominancy</label>
     <input id="dominancy" type="range" min="0" max="100">
   </div>
-</div>
+</nav>
 
-<div class="row" id="bodyPane">
-  <div class="col-sm-4" id="leftPane">
-    <span/>
-  </div>
+<div class="container">
+
+<div class="row">
+<div class="col-sm-4" id="leftPane">
+    <ul>
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+    </ul>
+
+</div>
   <div class="col-sm-8" id="mainBody">
   </div>
 </div>
 <!-- end of container -->
+</div>
+
+<!-- Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  Launch  modal
+</button>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Store open hours</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Intent Name</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">i1</th>
+            <td>information store location</td>
+            <td>0.72</td>
+          </tr>
+          <tr>
+            <th scope="row">i6</th>
+            <td>Make a payment</td>
+            <td>0.65</td>
+          </tr>
+          <tr>
+            <th scope="row">i7</th>
+            <td>Return a product</td>
+            <td>0.61</td>
+          </tr>
+          </tbody>
+        </table> <!--eof table -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -77,7 +133,7 @@ const anotherOrange="#E27000";//226,112,0
 var colors=[darkOrange,darkBlue,liteBlue,evenLiterBlue,lightOrange,liteBlue,purpleBlue,purpleBlue,evenLiterBlue,evenLiterBlue,evenLiterBlue,lightBrown,liteBlue,evenLiterBlue,litePurple,lighterOrange,purpleBlue,liteBlue,purpleBlue,lightOrange,darkBlue,litePurple,lightOrange,evenLiterBlue,litePurple,darkBlue,darkOrange,darkBlue,evenLiterBlue,litePurple,lightOrange,evenLiterBlue,purpleBlue,lightBrown,litePurple,lightOrange,litePurple,evenLiterBlue,litePurple,anotherOrange,liteBlue,purpleBlue,lighterOrange,litePurple,lightOrange,darkBlue,litePurple,lightOrange,purpleBlue,litePurple,lightBrown,darkBlue,liteBlue,lighterOrange,evenLiterBlue,lighterOrange,evenLiterBlue,evenLiterBlue,lightOrange,purpleBlue,litePurple,anotherOrange,liteBlue,lighterOrange,evenLiterBlue,lightOrange,litePurple,lightOrange,evenLiterBlue,lightBrown,evenLiterBlue,anotherOrange,evenLiterBlue,lighterOrange,anotherOrange,anotherOrange,anotherOrange,anotherOrange,lighterOrange,lighterOrange,lighterOrange,lighterOrange,lightOrange,lightOrange,lightOrange,lightOrange,lightBrown];
 
 // circle's labels: x,y,font-size,text
-var labels = [[267,153,20,"store open hours"],[286,130,12,"i5"]];
+var labels = [[260,150,10,"store"],[260,157,10,"open"],[260,165,10,"hours"],[282,135,12,"i5"]];
 
 
 
@@ -87,7 +143,7 @@ var color = d3.scale.category10();
 var zoom = d3.behavior.zoom()
     .on("zoom", zoomed);
 
-var svg = d3.select("body")
+var svg = d3.select("#mainBody")
     .on("touchstart", nozoom)
     .on("touchmove", nozoom)
   .append("svg")
@@ -100,7 +156,7 @@ g.append("rect")
     .attr("width", width)
     .attr("height", height)
     .attr("style","fill:blue;stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9")
-    .on("click", clicked);
+    ;//.on("click", clicked);
 
 var view = g.append("g")
     .attr("class", "view");
@@ -112,22 +168,28 @@ view.selectAll("circle")
     .attr("transform", function(d,i) { return "translate(" +d[0]+","+ d[1] + ")"; })
     .attr("r", function(d,i) { return d[2] })
     .attr("circleId" , function (d,i) { return i;} )
+    .attr("data-toggle","modal").attr("data-target","#exampleModalLong")
+    //.on("click", circleClicked)
     .style("fill", function(d, i) { return colors[i]; });
 
 // // here I take the labels and try to place them in middle of circle by reading array
 view.selectAll("text").data(labels).enter().append("text")
   .attr("x" , function(d,i) { return (d[0]); })
   .attr("y" , function(d,i) {return (d[1]); })
-  .attr("style", function(d,i) { return  "font-family:Times;font-size:"+d[2]+"px"; })
+  .attr("style", function(d,i) { return  "font-family:Times;font-size:"+d[2]+"px;fill:white"; })
   .html(function (d,i) { return d[3];} );
 
 function zoomed() {
   view.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
 }
 
+function circleClicked(d , i) {
+  console.log("circle clicked d="+d+ " i="+i);
+}
+
 function clicked(d, i) {
-  console.log("event clicked:"+d);
-  if (d3.event.defaultPrevented) return; // zoomed
+  console.log("event clicked:"+d+ " this="+this);
+  //if (d3.event.defaultPrevented) return; // zoomed
 
   d3.select(this).transition()
       .style("fill", "black")
