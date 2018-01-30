@@ -69,7 +69,7 @@
                         <th>Score</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="modal1body">
                     <tr>
                         <th scope="row">i1</th>
                         <td>information store location</td>
@@ -158,7 +158,7 @@
 
     // circle's labels: x,y,r (which should be taken from the matching circle) it affects the font-size,text
     var labels = [[260, 150, 30, "store"], [260, 157, 30, "open"], [260, 165, 30, "hours"], [282, 135, 12, "i5"]];
-    var intents= {"Store open hours": [ ["i1 " ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54]] }
+    var intents= {1: [ ["i1 " ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54]] }
 
 
     var zoom = d3.behavior.zoom()
@@ -177,7 +177,7 @@
         .attr("width", width)
         .attr("height", height)
         .attr("style", "fill:blue;stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9")
-    ;//.on("click", clicked);
+    ;
 
     var view = g.append("g")
         .attr("class", "view");
@@ -197,7 +197,7 @@
         })
         .attr("data-toggle", "modal")
         .attr("data-target", "#exampleModalLong")
-    //.on("click", circleClicked)
+        .on("click", circleClicked)
         .style("fill", function (d, i) {
             return colors[i];
         });
@@ -224,17 +224,25 @@
 
     function circleClicked(d, i) {
         console.log("circle clicked d=" + d + " i=" + i);
-    }
+        //inject rows to the table.
+        let tableBody = $("#modal1body");
+        if (tableBody) {
+          $("#modal1body").children().remove();
+          var circleId = +$(this).attr("circleId");
+          var circleIntents = intents[circleId];
+          console.log('intents for circle:'+circleIntents);
+          if (circleId && circleIntents) {
+            for (var i=0; i < circleIntents.length; i++) {
+              let row = circleIntents[i];
+                tableBody.append(
+                  '<tr><th scope="row">'+row[0]+'</th><td>'+row[1]+
+                  '</td><td>'+row[2]+'</td></tr>'
+                );
+              }
+            };
+          }
+        }
 
-    function clicked(d, i) {
-        console.log("event clicked:" + d + " this=" + this);
-        //if (d3.event.defaultPrevented) return; // zoomed
-
-        d3.select(this).transition()
-            .style("fill", "black")
-            .transition()
-            .style("fill", "white");
-    }
 
     function nozoom() {
         d3.event.preventDefault();
