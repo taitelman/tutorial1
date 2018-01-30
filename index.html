@@ -123,7 +123,7 @@
     var width = self.frameElement ? 960 : innerWidth,
         height = self.frameElement ? 500 : innerHeight;
 
-    // data is uniqueCircleID, x,y,radius, for circles centers
+    // data is (unique) circleID, x,y,radius, for circles centers
     var circles = [[1,267, 153, 30], [2,286, 130, 12], [3,238, 155, 8],
     [4,290, 171, 1], [5,261, 272, 34], [6,289, 252, 10], [7,284, 297, 5],
     [8,245, 301, 5], [9,233, 290, 5], [10,228, 265, 5], [11,251, 241, 5],
@@ -158,8 +158,9 @@
 
     // circle's labels: x,y,r (which should be taken from the matching circle) it affects the font-size,text
     var labels = [[260, 150, 30, "store"], [260, 157, 30, "open"], [260, 165, 30, "hours"], [282, 135, 12, "i5"]];
-    var intents= {1: [ ["i1 " ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54]] }
 
+    // first number is circleID , then array of rows for modal1 dialog when circleID is chosen
+    var intents= {1: [ ["i1 " ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54]] }
 
     var zoom = d3.behavior.zoom()
         .on("zoom", zoomed);
