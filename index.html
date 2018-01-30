@@ -3,203 +3,242 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="./index.css">
-  <script src="https://d3js.org/d3.v3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://d3js.org/d3.v3.js"></script>
 </head>
 
 <body>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-  <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
-  <div class="col-sm-4">
-    <span/>
-  </div>
-  <div class="col-sm-2">
-    <label for="numOfConversations">Number of conv:</label>
-    <input id="numOfConversations" type="range" min="0" max="100" step="10" onchange="numOfConvChanged(value)">
-  </div>
-  <div class="col-sm-2">
-    <label for="dominancy">dominancy</label>
-    <input id="dominancy" type="range" min="0" max="100">
-  </div>
+    <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
+    <div class="col-sm-4">
+        <span/>
+    </div>
+    <div class="col-sm-2">
+        <label for="numOfConversations">Number of conv:</label>
+        <input id="numOfConversations" type="range" min="0" max="100" step="10" onchange="numOfConvChanged(value)">
+    </div>
+    <div class="col-sm-2">
+        <label for="dominancy">dominancy</label>
+        <input id="dominancy" type="range" min="0" max="100">
+    </div>
 </nav>
 
 <div class="container">
 
-<div class="row">
-<div class="col-sm-4" id="leftPane">
-    <ul>
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-4" id="leftPane">
+            <ul>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+            </ul>
 
-</div>
-  <div class="col-sm-8" id="mainBody">
-  </div>
-</div>
-<!-- end of container -->
-</div>
-
-<!-- Modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-  Launch  modal
-</button>
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Store open hours</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Intent Name</th>
-              <th>Score</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <th scope="row">i1</th>
-            <td>information store location</td>
-            <td>0.72</td>
-          </tr>
-          <tr>
-            <th scope="row">i6</th>
-            <td>Make a payment</td>
-            <td>0.65</td>
-          </tr>
-          <tr>
-            <th scope="row">i7</th>
-            <td>Return a product</td>
-            <td>0.61</td>
-          </tr>
-          </tbody>
-        </table> <!--eof table -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+        </div>
+        <div class="col-sm-8" id="mainBody">
+        </div>
     </div>
-  </div>
+    <!-- end of container -->
+</div>
+
+<!-- dialog 1 -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Store open hours</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover table-sm table-responsive">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Intent Name</th>
+                        <th>Score</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">i1</th>
+                        <td>information store location</td>
+                        <td>0.72</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">i6</th>
+                        <td>Make a payment</td>
+                        <td>0.65</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">i7</th>
+                        <td>Return a product</td>
+                        <td>0.61</td>
+                    </tr>
+                    </tbody>
+                </table> <!--eof table -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
 
-// a method to show/hide circles based on radius
-function numOfConvChanged(value) {
-  $("circle").each(function () {
-    var r= +$(this).attr("r");
-    var sliderVal =  +value;
-    if (r && r < sliderVal) {
-      console.log('r='+r);
-      $(this).hide();
-    } else {
-      $(this).show();
+    // a method to show/hide circles based on radius
+    function numOfConvChanged(value) {
+        $("circle").each(function () {
+            var r = +$(this).attr("r");
+            var sliderVal = +value;
+            if (r && r < sliderVal) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+      $("text").each(function () {
+          var r = +$(this).attr("r");
+          var sliderVal = +value;
+          if (r && r < sliderVal) {
+              $(this).hide();
+          } else {
+              $(this).show();
+          }
+      });
     }
-  });
-}
 
 
+    var width = self.frameElement ? 960 : innerWidth,
+        height = self.frameElement ? 500 : innerHeight;
 
-var width = self.frameElement ? 960 : innerWidth,
-    height = self.frameElement ? 500 : innerHeight;
+    // data is uniqueCircleID, x,y,radius, for circles centers
+    var circles = [[1,267, 153, 30], [2,286, 130, 12], [3,238, 155, 8],
+    [4,290, 171, 1], [5,261, 272, 34], [6,289, 252, 10], [7,284, 297, 5],
+    [8,245, 301, 5], [9,233, 290, 5], [10,228, 265, 5], [11,251, 241, 5],
+    [12,251, 360, 36], [13,250, 327, 12], [14,283, 375, 5], [15,224, 384, 12],
+     [16, 313, 206, 26], [17,336, 207, 5], [18,306, 227, 10], [19,300, 185, 8],
+      [20,329, 268, 22], [21,349, 270, 10], [22,312, 280, 8,22], [23,311, 331, 26],
+       [24,330, 318, 5], [25, 305, 354, 8,25], [26,288, 322, 10], [27,371, 162, 20],
+        [28,384, 149, 8], [29,387, 172, 5], [30,355, 172, 10], [31,381, 235, 20,31],
+         [32,403, 242, 8], [33,364, 229, 5], [34,372, 351, 20], [35,365, 366, 8],
+         [36,415, 315, 18], [37,430, 325, 8], [38,400, 325, 8], [39,405, 296, 10], [40,458, 154, 18],
+          [41,471, 163, 10], [42,438, 158, 8], [43,436, 216, 18], [44,450, 212, 10], [45,453, 267, 18],
+           [46,450, 282, 5], [47,433, 264, 10], [48,481, 324, 16], [49,485, 338, 8], [50,467, 320, 8],
+           [51,491, 369, 20], [52,512, 361, 12], [53,474, 358, 8], [54,519, 178, 16], [55,530, 165, 8],
+            [56,503, 231, 16], [57,499, 244, 5], [58,487, 229, 5], [59,529, 280, 15], [60,539, 271, 5],
+             [61,515, 280, 5], [62,584, 154, 12], [63,594, 161, 5], [64,567, 215, 12], [65,574, 220, 5],
+              [66,591, 252, 12], [67,604, 241, 10], [68,613, 314, 12], [69,603, 316, 5], [70,632, 373, 12],
+              [71,622, 365, 5], [72,625, 169, 12], [73,626, 179, 5], [74,633, 228, 12], [75,661, 183, 7],
+               [76,685, 150, 7], [77,702, 174, 7], [78,692, 204, 7], [79,669, 247, 7], [80,703, 233, 7],
+                [81,724, 220, 7], [82,748, 237, 7], [83,688, 268, 7], [84,671, 301, 7], [85,703, 303, 7],
+                 [86,728, 288, 7], [87,664, 352, 9]];
+    const darkOrange = "#d46900"; // rgb: 212,105,0
+    const darkBlue = "#001c9c"; // rgb 0,28,156
+    const liteBlue = "#afbdff"; // rgb(175,189,255)
+    const evenLiterBlue = "#c6d0ff"; //rgb(198,208,255)
+    const lightOrange = "#F8CBAD";//248,203,173
+    const purpleBlue = "#200D9D"; //32,13,157
+    const litePurple = "#92A6FF";//146,166,255
+    const lightBrown = "#FBE5D6"; //251,229,214
+    const lighterOrange = "#FFA651"; // 255,166,81
+    const anotherOrange = "#E27000";//226,112,0
+    var colors = [darkOrange, darkBlue, liteBlue, evenLiterBlue, lightOrange, liteBlue, purpleBlue, purpleBlue, evenLiterBlue, evenLiterBlue, evenLiterBlue, lightBrown, liteBlue, evenLiterBlue, litePurple, lighterOrange, purpleBlue, liteBlue, purpleBlue, lightOrange, darkBlue, litePurple, lightOrange, evenLiterBlue, litePurple, darkBlue, darkOrange, darkBlue, evenLiterBlue, litePurple, lightOrange, evenLiterBlue, purpleBlue, lightBrown, litePurple, lightOrange, litePurple, evenLiterBlue, litePurple, anotherOrange, liteBlue, purpleBlue, lighterOrange, litePurple, lightOrange, darkBlue, litePurple, lightOrange, purpleBlue, litePurple, lightBrown, darkBlue, liteBlue, lighterOrange, evenLiterBlue, lighterOrange, evenLiterBlue, evenLiterBlue, lightOrange, purpleBlue, litePurple, anotherOrange, liteBlue, lighterOrange, evenLiterBlue, lightOrange, litePurple, lightOrange, evenLiterBlue, lightBrown, evenLiterBlue, anotherOrange, evenLiterBlue, lighterOrange, anotherOrange, anotherOrange, anotherOrange, anotherOrange, lighterOrange, lighterOrange, lighterOrange, lighterOrange, lightOrange, lightOrange, lightOrange, lightOrange, lightBrown];
 
-// data is x,y,r for circles centers
-var circles =[[267,153,30],[286,130,12],[238,155,8],[290,171,1],[261,272,34],[289,252,10],[284,297,5],[245,301,5],[233,290,5],[228,265,5],[251,241,5],[251,360,36],[250,327,12],[283,375,5],[224,384,12],[313,206,26],[336,207,5],[306,227,10],[300,185,8],[329,268,22],[349,270,10],[312,280,8],[311,331,26],[330,318,5],[305,354,8],[288,322,10],[371,162,20],[384,149,8],[387,172,5],[355,172,10],[381,235,20],[403,242,8],[364,229,5],[372,351,20],[365,366,8],[415,315,18],[430,325,8],[400,325,8],[405,296,10],[458,154,18],[471,163,10],[438,158,8],[436,216,18],[450,212,10],[453,267,18],[450,282,5],[433,264,10],[481,324,16],[485,338,8],[467,320,8],[491,369,20],[512,361,12],[474,358,8],[519,178,16],[530,165,8],[503,231,16],[499,244,5],[487,229,5],[529,280,15],[539,271,5],[515,280,5],[584,154,12],[594,161,5],[567,215,12],[574,220,5],[591,252,12],[604,241,10],[613,314,12],[603,316,5],[632,373,12],[622,365,5],[625,169,12],[626,179,5],[633,228,12],[661,183,7],[685,150,7],[702,174,7],[692,204,7],[669,247,7],[703,233,7],[724,220,7],[748,237,7],[688,268,7],[671,301,7],[703,303,7],[728,288,7],[664,352,9]];
-const darkOrange="#d46900"; // rgb: 212,105,0
-const darkBlue="#001c9c"; // rgb 0,28,156
-const liteBlue="#afbdff"; // rgb(175,189,255)
-const evenLiterBlue="#c6d0ff"; //rgb(198,208,255)
-const lightOrange = "#F8CBAD" ;//248,203,173
-const purpleBlue="#200D9D"; //32,13,157
-const litePurple="#92A6FF";//146,166,255
-const lightBrown="#FBE5D6"; //251,229,214
-const lighterOrange="#FFA651"; // 255,166,81
-const anotherOrange="#E27000";//226,112,0
-var colors=[darkOrange,darkBlue,liteBlue,evenLiterBlue,lightOrange,liteBlue,purpleBlue,purpleBlue,evenLiterBlue,evenLiterBlue,evenLiterBlue,lightBrown,liteBlue,evenLiterBlue,litePurple,lighterOrange,purpleBlue,liteBlue,purpleBlue,lightOrange,darkBlue,litePurple,lightOrange,evenLiterBlue,litePurple,darkBlue,darkOrange,darkBlue,evenLiterBlue,litePurple,lightOrange,evenLiterBlue,purpleBlue,lightBrown,litePurple,lightOrange,litePurple,evenLiterBlue,litePurple,anotherOrange,liteBlue,purpleBlue,lighterOrange,litePurple,lightOrange,darkBlue,litePurple,lightOrange,purpleBlue,litePurple,lightBrown,darkBlue,liteBlue,lighterOrange,evenLiterBlue,lighterOrange,evenLiterBlue,evenLiterBlue,lightOrange,purpleBlue,litePurple,anotherOrange,liteBlue,lighterOrange,evenLiterBlue,lightOrange,litePurple,lightOrange,evenLiterBlue,lightBrown,evenLiterBlue,anotherOrange,evenLiterBlue,lighterOrange,anotherOrange,anotherOrange,anotherOrange,anotherOrange,lighterOrange,lighterOrange,lighterOrange,lighterOrange,lightOrange,lightOrange,lightOrange,lightOrange,lightBrown];
-
-// circle's labels: x,y,font-size,text
-var labels = [[260,150,10,"store"],[260,157,10,"open"],[260,165,10,"hours"],[282,135,12,"i5"]];
+    // circle's labels: x,y,r (which should be taken from the matching circle) it affects the font-size,text
+    var labels = [[260, 150, 30, "store"], [260, 157, 30, "open"], [260, 165, 30, "hours"], [282, 135, 12, "i5"]];
+    var intents= {"Store open hours": [ ["i1 " ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54]] }
 
 
+    var zoom = d3.behavior.zoom()
+        .on("zoom", zoomed);
 
+    var svg = d3.select("#mainBody")
+        .on("touchstart", nozoom)
+        .on("touchmove", nozoom)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
 
-var color = d3.scale.category10();
+    var g = svg.append("g").call(zoom);
 
-var zoom = d3.behavior.zoom()
-    .on("zoom", zoomed);
-
-var svg = d3.select("#mainBody")
-    .on("touchstart", nozoom)
-    .on("touchmove", nozoom)
-  .append("svg")
-    .attr("width", width)
-    .attr("height", height);
-
-var g = svg.append("g").call(zoom);
-
-g.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("style","fill:blue;stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9")
+    g.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("style", "fill:blue;stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9")
     ;//.on("click", clicked);
 
-var view = g.append("g")
-    .attr("class", "view");
+    var view = g.append("g")
+        .attr("class", "view");
 
-// here I can take array of circles and automatically place it in the space.
-view.selectAll("circle")
-    .data(circles)
-  .enter().append("circle")
-    .attr("transform", function(d,i) { return "translate(" +d[0]+","+ d[1] + ")"; })
-    .attr("r", function(d,i) { return d[2] })
-    .attr("circleId" , function (d,i) { return i;} )
-    .attr("data-toggle","modal").attr("data-target","#exampleModalLong")
+    // here I can take array of circles and automatically place it in the space.
+    view.selectAll("circle")
+        .data(circles)
+        .enter().append("circle")
+        .attr("transform", function (d, i) {
+            return "translate(" + d[1] + "," + d[2] + ")";
+        })
+        .attr("r", function (d, i) {
+            return d[3]
+        })
+        .attr("circleId", function (d, i) {
+            return d[0];
+        })
+        .attr("data-toggle", "modal")
+        .attr("data-target", "#exampleModalLong")
     //.on("click", circleClicked)
-    .style("fill", function(d, i) { return colors[i]; });
+        .style("fill", function (d, i) {
+            return colors[i];
+        });
 
-// // here I take the labels and try to place them in middle of circle by reading array
-view.selectAll("text").data(labels).enter().append("text")
-  .attr("x" , function(d,i) { return (d[0]); })
-  .attr("y" , function(d,i) {return (d[1]); })
-  .attr("style", function(d,i) { return  "font-family:Times;font-size:"+d[2]+"px;fill:white"; })
-  .html(function (d,i) { return d[3];} );
+    // // here I take the labels and try to place them in middle of circle by reading array
+    view.selectAll("text").data(labels).enter().append("text")
+        .attr("x", function (d, i) {
+            return (d[0]);
+        })
+        .attr("y", function (d, i) {
+            return (d[1]);
+        })
+        .attr("style", function (d, i) {
+            return "font-family:Times;font-size:" + (d[2]/3) + "px;fill:white";
+        })
+        .attr("r",function (d,i) { return d[2]; })
+        .html(function (d, i) {
+            return d[3];
+        });
 
-function zoomed() {
-  view.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
-}
+    function zoomed() {
+        view.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+    }
 
-function circleClicked(d , i) {
-  console.log("circle clicked d="+d+ " i="+i);
-}
+    function circleClicked(d, i) {
+        console.log("circle clicked d=" + d + " i=" + i);
+    }
 
-function clicked(d, i) {
-  console.log("event clicked:"+d+ " this="+this);
-  //if (d3.event.defaultPrevented) return; // zoomed
+    function clicked(d, i) {
+        console.log("event clicked:" + d + " this=" + this);
+        //if (d3.event.defaultPrevented) return; // zoomed
 
-  d3.select(this).transition()
-      .style("fill", "black")
-    .transition()
-      .style("fill", "white");
-}
+        d3.select(this).transition()
+            .style("fill", "black")
+            .transition()
+            .style("fill", "white");
+    }
 
-function nozoom() {
-  d3.event.preventDefault();
-}
+    function nozoom() {
+        d3.event.preventDefault();
+    }
 
 </script>
 </html>
