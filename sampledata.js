@@ -43,11 +43,17 @@ var intentContnet = { i1 :
     { title : "information store location" ,  dominancy:92 , conversations:492 , totalScore: 0.91,
         sections: [
             { title: "store open hours", dominancy:86 , conversations:279  ,hint: "consider adding new intent" ,
-                content: {f1: {name: "rephrasing",value:141} ,f2: {name: "emotions",value:45},f4:{name:"asking for human",value:43} }},
-            { title: "cannot find" , dominancy:42 , conversations:121 ,hint:"Consider add emotional response",
-                content: {f3: {name : "emotions" ,value:121}  , f4: {name : "ask for human" , value:89}, f2 : {name: "agent reception" , value:50} }}
-            ]
+                content: [ {key: "f1",value:141} , {key: "f3",value:45},{key:"f4",value:43} ]
+            },
+            { title: "cannot find" , dominancy:42 , conversations:121 ,hint: "Consider add emotional response",
+                content: [ {key :"f3" ,value:121}  , {key : "f4" , value:89}, {key: "f2" , value:50} ]
+            }
+        ]
     },
     i9 : { title : "Order Status" , totalScore: 0.87}
 
+};
+
+var features = {
+    f1 : "rephrasing", f3: "emotions",f2:"agent reception" ,f4:"asking for human"
 };
