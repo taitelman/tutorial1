@@ -105,21 +105,22 @@ function circleClicked(d, i) {
         $("#model1title").append('<h5>'+tableTitle+'</h5>')
 
         if (circleId && circleIntents) {
-            for (let i=0; i < circleIntents.length; i++) {
+            for (let i = 0; i < circleIntents.length; i++) {
                 let row = circleIntents[i];
                 tableBody.append(
-                    '<tr data-toggle="modal" data-target="#modal2"><td>'+row[0]+'</td><td>'+row[1]+
-                    '</td><td>'+row[2]+'</td></tr>'
+                    '<tr data-toggle="modal" data-target="#modal2"><td>' + row[0] + '</td><td>' + row[1] +
+                    '</td><td>' + row[2] + '</td></tr>'
                 );
             }
-        };
 
-        $('#modal1body tr').click(function() {
-            //when user clicks on modal1 row this event will be called.
-            let intentId = $(this).children().closest('td').html();
-            console.log("intent=" + intentId + " clicked");
-            fill2ndModalTable(intentId);
-        });
+
+            $('#modal1body tr').click(function () {
+                //when user clicks on modal1 row this event will be called.
+                let intentId = $(this).children().closest('td').html();
+                console.log("intent=" + intentId + " clicked");
+                fill2ndModalTable(intentId);
+            });
+        }
     }
 }
 
