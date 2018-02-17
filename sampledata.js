@@ -35,5 +35,16 @@ var colors = [darkOrange, darkBlue, liteBlue, evenLiterBlue, lightOrange, liteBl
 var labels = [[260, 150, 30, "store"], [260, 157, 30, "open"], [260, 165, 30, "hours"], [282, 135, 12, "i5"]];
 
 // first number is circleID , then array of rows for modal1 dialog when circleID is chosen
-var intents= {1: [ ["i1" ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54] ,["i8","a",1],["i9","b",2],["i10","c",1],["i11","d",2],["i12","e",0.62],["i14","aaa",12] ] }
+var intentsPerCircleId= {1: [ ["i1" ,"information store location" , 0.72] , ["i6"  , "Make a payment" , 0.65],  ["i7","Return a product",0.54] ,["i8","a",1],["i9","b",2],["i10","c",1],["i11","d",2],["i12","e",0.62],["i14","aaa",12] ] }
 var topics = {1 : "topic a",2 :"topic b"};
+
+//the following intentContnet is displayed in the 2nd click (2nd modal screen)
+var intentContnet = { i1 :
+    { title : "information store location" ,  dominancy:92 , conversations:492 ,
+        sections: [{ title: "store open hours", dominancy:86 , conversations:279  ,hint: "consider adding new intent" ,
+            content: {f1: "rephrasing" ,f2:"emotions",f4: "asking for human" }},
+            { title: "cannot find" , dominancy:42 , conversations:121 ,hint:"Consider add emotional response",
+                content: {f3: "emotions"  , f4: "ask for human", f2 : "agent reception" }}
+            ]
+    }
+};

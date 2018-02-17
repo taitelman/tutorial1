@@ -84,7 +84,7 @@ function circleClicked(d, i) {
     let tableBody = $("#modal1body");
     if (tableBody) {
         let circleId = +$(this).attr("circleId");
-        let circleIntents = intents[circleId];
+        let circleIntents = intentsPerCircleId[circleId];
         let tableTitle = topics[circleId];
         console.log('intents for circle:'+circleIntents);
         $("#modal1body").empty(); //cleans old table data
@@ -101,11 +101,38 @@ function circleClicked(d, i) {
                 );
             }
         };
+
         $('#modal1body tr').click(function() {
             //when user clicks on modal1 row this event will be called.
-            var intentId = $(this).children().closest('td').html();
-            console.log("intent="+intentId + " clicked");
-            // fill here modal2 data...
+            let intentId = $(this).children().closest('td').html();
+            console.log("intent=" + intentId + " clicked");
+            let content = intentContnet[intentId];
+            $("#model2title").empty();
+            $("#model2title").append('<h3>' + intentId + ':' + content["title"] + '</h3>');
+            $("#model2title").append('<h5> Dominancy:' + content["dominancy"] + '% | Conversations:' + content["conversations"] + '</h5>');
+            $("#modal2body").empty();
+            let tableBody = $("#modal2body");
+
+            let rows = content["sections"]; // this will return an array
+            if (rows) {
+                for (let i =0 ; i < rows.length ; i++) {
+                    let row = rows[i];
+                    let subContent = row["content"];
+                    let extrahtmlContent = '';
+                    for (element in subContent) {
+                        extrahtmlContent += '<p>'+element + ':' + subContent[element]+'</p>'
+                    }
+                    console.log(extrahtmlContent);
+
+                    tableBody.append('<tr><td><h6>' + row["title"]
+                        + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
+                        + extrahtmlContent
+                        + '<p>Hint:' + row["hint"]+ '</p></td></tr>');
+
+                }
+
+            }
+
         });
     }
 }
