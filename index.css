@@ -12,3 +12,14 @@ svg {
 rect {
   fill: white;
 }
+
+
+#modal1body tr {
+  background-color: #eee;
+  border-top: 1px solid #fff;
+}
+
+#modal1body tr:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}

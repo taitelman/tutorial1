@@ -17,7 +17,7 @@ $(document).ready(function() {
             return d[0];
         })
         .attr("data-toggle", "modal")
-        .attr("data-target", "#exampleModalLong")
+        .attr("data-target", "#modal1")
         .on("click", circleClicked)
         .style("fill", function (d, i) {
             return colors[i];
@@ -38,6 +38,8 @@ $(document).ready(function() {
         .html(function (d, i) {
             return d[3];
         });
+
+
 
 
 });
@@ -81,22 +83,30 @@ function circleClicked(d, i) {
     //inject rows to the table.
     let tableBody = $("#modal1body");
     if (tableBody) {
-        var circleId = +$(this).attr("circleId");
-        var circleIntents = intents[circleId];
+        let circleId = +$(this).attr("circleId");
+        let circleIntents = intents[circleId];
+        let tableTitle = topics[circleId];
         console.log('intents for circle:'+circleIntents);
-        $("#modal1body").children().remove();
+        $("#modal1body").empty(); //cleans old table data
         // here we also need to re-write the title
-        //$("exampleHeaderLongLong").removeChild(0);
-        //$("exampleHeaderLongLong").appendHtml(topics[circleId]);
+        $("#model1title").empty();
+        $("#model1title").append('<h5>'+tableTitle+'</h5>')
+
         if (circleId && circleIntents) {
-            for (var i=0; i < circleIntents.length; i++) {
+            for (let i=0; i < circleIntents.length; i++) {
                 let row = circleIntents[i];
                 tableBody.append(
-                    '<tr><td>'+row[0]+'</td><td>'+row[1]+
+                    '<tr data-toggle="modal" data-target="#modal2"><td>'+row[0]+'</td><td>'+row[1]+
                     '</td><td>'+row[2]+'</td></tr>'
                 );
             }
         };
+        $('#modal1body tr').click(function() {
+            //when user clicks on modal1 row this event will be called.
+            var intentId = $(this).children().closest('td').html();
+            console.log("intent="+intentId + " clicked");
+            // fill here modal2 data...
+        });
     }
 }
 
@@ -123,7 +133,4 @@ var view = g.append("g")
     .attr("class", "view");
 
 
-//function update(slider,val) {
-// $('#slider a').html('<label><span class="glyphicon glyphicon-chevron-left"></span> '+$amount+' <span class="glyphicon glyphicon-chevron-right"></span></label>');
-//}
 
