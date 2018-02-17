@@ -40,7 +40,7 @@ $(document).ready(function() {
         });
 
 
-
+    fillLeftPaneIntentTable();
 
 });
 
@@ -78,6 +78,18 @@ function nozoom() {
     d3.event.preventDefault();
 }
 
+function fillLeftPaneIntentTable() {
+    $("#leftPaneTable").empty()
+    let tableBody =$("#leftPaneTable");
+    for (key in intentContnet) {
+        let row = intentContnet[key];
+        let functionString = "fill2ndModalTable(\""+key+"\")";
+        tableBody.append('<tr data-toggle="modal" data-target="#modal2" onclick='+ functionString +'><td>'+key+'</td><td>'+row["title"]+
+            '</td><td>'+row["totalScore"]+'</td></tr>');
+    }
+}
+
+
 function circleClicked(d, i) {
     console.log("circle clicked d=" + d + " i=" + i);
     //inject rows to the table.
@@ -106,34 +118,37 @@ function circleClicked(d, i) {
             //when user clicks on modal1 row this event will be called.
             let intentId = $(this).children().closest('td').html();
             console.log("intent=" + intentId + " clicked");
-            let content = intentContnet[intentId];
-            $("#model2title").empty();
-            $("#model2title").append('<h3>' + intentId + ':' + content["title"] + '</h3>');
-            $("#model2title").append('<h5> Dominancy:' + content["dominancy"] + '% | Conversations:' + content["conversations"] + '</h5>');
-            $("#modal2body").empty();
-            let tableBody = $("#modal2body");
-
-            let rows = content["sections"]; // this will return an array
-            if (rows) {
-                for (let i =0 ; i < rows.length ; i++) {
-                    let row = rows[i];
-                    let subContent = row["content"];
-                    let extrahtmlContent = '';
-                    for (element in subContent) {
-                        extrahtmlContent += '<p>'+element + ':' + subContent[element]+'</p>'
-                    }
-                    console.log(extrahtmlContent);
-
-                    tableBody.append('<tr><td><h6>' + row["title"]
-                        + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
-                        + extrahtmlContent
-                        + '<p>Hint:' + row["hint"]+ '</p></td></tr>');
-
-                }
-
-            }
-
+            fill2ndModalTable(intentId);
         });
+    }
+}
+
+function fill2ndModalTable(intentId) {
+    let content = intentContnet[intentId];
+    $("#model2title").empty();
+    $("#model2title").append('<h3>' + intentId + ':' + content["title"] + '</h3>');
+    $("#model2title").append('<h5> Dominancy:' + content["dominancy"] + '% | Conversations:' + content["conversations"] + '</h5>');
+    $("#modal2body").empty();
+    let tableBody = $("#modal2body");
+
+    let rows = content["sections"]; // this will return an array
+    if (rows) {
+        for (let i =0 ; i < rows.length ; i++) {
+            let row = rows[i];
+            let subContent = row["content"];
+            let extrahtmlContent = '';
+            for (element in subContent) {
+                extrahtmlContent += '<p>'+element + ':' + subContent[element]+'</p>'
+            }
+            console.log(extrahtmlContent);
+
+            tableBody.append('<tr><td><h6>' + row["title"]
+                + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
+                + extrahtmlContent
+                + '<p>Hint:' + row["hint"]+ '</p></td></tr>');
+
+        }
+
     }
 }
 

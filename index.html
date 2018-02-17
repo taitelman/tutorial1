@@ -28,30 +28,29 @@
     </div>
     <div class="col-sm-2">
         <label for="dominancy">dominancy</label>
-
-        <!--
-        <div id="slider"></div>
-      -->
         <input id="dominancy" type="range" min="0" max="100">
     </div>
 </nav>
 
 <div class="container">
-
     <div class="row">
         <div class="col-sm-4" id="leftPane">
-            <ul>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-
+            <table class="table table-bordered table-hover table-sm table-responsive">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Intent Name</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody id="leftPaneTable">
+                <tr>
+                    <th scope="row">i1</th>
+                    <td>information store location</td>
+                    <td>0.91</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col-sm-8" id="mainBody">
         </div>
