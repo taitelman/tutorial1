@@ -81,8 +81,8 @@ function nozoom() {
 function fillLeftPaneIntentTable() {
     $("#leftPaneTable").empty()
     let tableBody =$("#leftPaneTable");
-    for (key in intentContnet) {
-        let row = intentContnet[key];
+    for (key in intentContent) {
+        let row = intentContent[key];
         let functionString = "fill2ndModalTable(\""+key+"\")";
         tableBody.append('<tr data-toggle="modal" data-target="#modal2" onclick='+ functionString +'><td>'+key+'</td><td>'+row["title"]+
             '</td><td>'+row["totalScore"]+'</td></tr>');
@@ -107,9 +107,12 @@ function circleClicked(d, i) {
         if (circleId && circleIntents) {
             for (let i = 0; i < circleIntents.length; i++) {
                 let row = circleIntents[i];
+                let intentId = row["key"];
+                let intentName = intentContent[intentId]["title"];
+                let intentValue = row["value"];
                 tableBody.append(
-                    '<tr data-toggle="modal" data-target="#modal2"><td>' + row[0] + '</td><td>' + row[1] +
-                    '</td><td>' + row[2] + '</td></tr>'
+                    '<tr data-toggle="modal" data-target="#modal2"><td>' + row["key"] + '</td><td>' + intentName +
+                    '</td><td>' + intentValue + '</td></tr>'
                 );
             }
 
@@ -125,7 +128,7 @@ function circleClicked(d, i) {
 }
 
 function fill2ndModalTable(intentId) {
-    let content = intentContnet[intentId];
+    let content = intentContent[intentId];
     $("#model2title").empty();
     $("#model2title").append('<h3>' + intentId + ':' + content["title"] + '</h3>');
     $("#model2title").append('<h5> Dominancy:' + content["dominancy"] + '% | Conversations:' + content["conversations"] + '</h5>');
