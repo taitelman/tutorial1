@@ -41,10 +41,11 @@ var topics = {1 : "topic a",2 :"topic b"};
 //the following intentContnet is displayed in the 2nd click (2nd modal screen)
 var intentContnet = { i1 :
     { title : "information store location" ,  dominancy:92 , conversations:492 , totalScore: 0.91,
-        sections: [{ title: "store open hours", dominancy:86 , conversations:279  ,hint: "consider adding new intent" ,
-            content: {f1: "rephrasing" ,f2:"emotions",f4: "asking for human" }},
+        sections: [
+            { title: "store open hours", dominancy:86 , conversations:279  ,hint: "consider adding new intent" ,
+                content: {f1: {name: "rephrasing",value:141} ,f2: {name: "emotions",value:45},f4:{name:"asking for human",value:43} }},
             { title: "cannot find" , dominancy:42 , conversations:121 ,hint:"Consider add emotional response",
-                content: {f3: "emotions"  , f4: "ask for human", f2 : "agent reception" }}
+                content: {f3: {name : "emotions" ,value:121}  , f4: {name : "ask for human" , value:89}, f2 : {name: "agent reception" , value:50} }}
             ]
     },
     i9 : { title : "Order Status" , totalScore: 0.87}

@@ -137,8 +137,9 @@ function fill2ndModalTable(intentId) {
             let row = rows[i];
             let subContent = row["content"];
             let extrahtmlContent = '';
-            for (element in subContent) {
-                extrahtmlContent += '<p>'+element + ':' + subContent[element]+'</p>'
+            for (featureId in subContent) {
+                let feature = subContent[featureId];
+                extrahtmlContent += '<p>'+featureId + ':' + feature["name"]+ ' : ' +feature["value"]+ '</p>'
             }
             console.log(extrahtmlContent);
 
