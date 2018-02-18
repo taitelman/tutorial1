@@ -111,7 +111,7 @@ function circleClicked(d, i) {
                 let intentName = intentContent[intentId]["title"];
                 let intentValue = row["value"];
                 tableBody.append(
-                    '<tr data-toggle="modal" data-target="#modal2"><td>' + row["key"] + '</td><td>' + intentName +
+                    '<tr data-toggle="modal" data-target="#modal2"><td>' + intentId + '</td><td>' + intentName +
                     '</td><td>' + intentValue + '</td></tr>'
                 );
             }
@@ -144,14 +144,16 @@ function fill2ndModalTable(intentId) {
             for (let j = 0 ; j < subContent.length ; j++) {
                 let feature = subContent[j];
                 let featureId = feature["key"];
-                extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +feature["value"]+ '</p>'
+                let featureValue  = +feature["value"] / content["conversations"] * 100;
+                let progressBar=  '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:'+featureValue+'%"></div> </div>';
+                extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +progressBar+ '</p>'
             }
             console.log(extrahtmlContent);
 
             tableBody.append('<tr><td><h6>' + row["title"]
                 + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
                 + extrahtmlContent
-                + '<p>Hint:' + row["hint"]+ '</p></td></tr>');
+                + '<p class="glyphicon glyphicon-flag">' + row["hint"]+ '</p></td></tr>');
 
         }
 
