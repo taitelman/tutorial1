@@ -43,7 +43,7 @@ var intentContent = { i1 :
     { title : "information store location" ,  dominancy:92 , conversations:492 , totalScore: 0.91,
         sections: [
             { title: "store open hours", dominancy:86 , conversations:279  ,hint: "consider adding new intent" ,
-                content: [ {key: "f1",value:141} , {key: "f3",value:45},{key:"f4",value:43} ]
+                content: [ {key: "f1",value:141} , {key: "f3",value:45},{key:"f4",value:43},{} ]
             },
             { title: "cannot find" , dominancy:42 , conversations:121 ,hint: "Consider add emotional response",
                 content: [ {key :"f3" ,value:121}  , {key : "f4" , value:89}, {key: "f2" , value:50} ]

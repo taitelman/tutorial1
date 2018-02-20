@@ -144,9 +144,11 @@ function fill2ndModalTable(intentId) {
             for (let j = 0 ; j < subContent.length ; j++) {
                 let feature = subContent[j];
                 let featureId = feature["key"];
-                let featureValue  = +feature["value"] / content["conversations"] * 100;
-                let progressBar=  '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:'+featureValue+'%"></div> </div>';
-                extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +progressBar+ '</p>'
+                if (featureId) {
+                    let featureValue = +feature["value"] / content["conversations"] * 100;
+                    let progressBar = '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:' + featureValue + '%"></div> </div>';
+                    extrahtmlContent += '<p>' + featureId + ':' + features[featureId] + ' : ' + progressBar + '</p>'
+                }
             }
             console.log(extrahtmlContent);
 
