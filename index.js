@@ -17,7 +17,10 @@ $(document).ready(function() {
             return d[0];
         })
         .attr("data-toggle", "modal")
-        .attr("data-target", "#modal1")
+        .attr("data-target", function(d,i) {
+            let intentAsStr = ''+d[0].toString();
+            return intentAsStr.startsWith('i') ? "#modal2" : "#modal1";
+        })
         .on("click", circleClicked)
         .style("fill", function (d, i) {
             return colors[i];
@@ -95,34 +98,41 @@ function circleClicked(d, i) {
     //inject rows to the table.
     let tableBody = $("#modal1body");
     if (tableBody) {
-        let circleId = +$(this).attr("circleId");
-        let circleIntents = intentsPerCircleId[circleId];
-        let tableTitle = topics[circleId];
-        console.log('intents for circleId:'+circleId+' are '+circleIntents);
-        $("#modal1body").empty(); //cleans old table data
-        // here we also need to re-write the title
-        $("#model1title").empty();
-        $("#model1title").append('<h5>'+tableTitle+'</h5>')
+        let found = $(this).attr("circleId");
+        if (found && !found.startsWith('i')) {
+            let circleId = +$(this).attr("circleId");
+            let circleIntents = intentsPerCircleId[circleId];
+            let tableTitle = topics[circleId];
+            console.log('intents for circleId:' + circleId + ' are ' + circleIntents);
+            $("#modal1body").empty(); //cleans old table data
+            // here we also need to re-write the title
+            $("#model1title").empty();
+            $("#model1title").append('<h5>' + tableTitle + '</h5>')
 
-        if (circleId && circleIntents) {
-            for (let i = 0; i < circleIntents.length; i++) {
-                let row = circleIntents[i];
-                let intentId = row["key"];
-                let intentName = intentContent[intentId]["title"];
-                let intentValue = row["value"];
-                tableBody.append(
-                    '<tr data-toggle="modal" data-target="#modal2"><td>' + intentId + '</td><td>' + intentName +
-                    '</td><td>' + intentValue + '</td></tr>'
-                );
+            if (circleId && circleIntents) {
+                for (let i = 0; i < circleIntents.length; i++) {
+                    let row = circleIntents[i];
+                    let intentId = row["key"];
+                    let intentName = intentContent[intentId]["title"];
+                    let intentValue = row["value"];
+                    tableBody.append(
+                        '<tr data-toggle="modal" data-target="#modal2"><td>' + intentId + '</td><td>' + intentName +
+                        '</td><td>' + intentValue + '</td></tr>'
+                    );
+                }
+
+
+                $('#modal1body tr').click(function () {
+                    //when user clicks on modal1 row this event will be called.
+                    let intentId = $(this).children().closest('td').html();
+                    console.log("intent=" + intentId + " clicked");
+                    fill2ndModalTable(intentId);
+                });
             }
-
-
-            $('#modal1body tr').click(function () {
-                //when user clicks on modal1 row this event will be called.
-                let intentId = $(this).children().closest('td').html();
-                console.log("intent=" + intentId + " clicked");
-                fill2ndModalTable(intentId);
-            });
+        } else { //I assume its starts with i...
+            let intentId = found;
+            console.log("intent=" + intentId + " clicked");
+            fill2ndModalTable(intentId);
         }
     }
 }
