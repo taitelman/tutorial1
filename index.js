@@ -91,14 +91,14 @@ function fillLeftPaneIntentTable() {
 
 
 function circleClicked(d, i) {
-    console.log("circle clicked d=" + d + " i=" + i);
+    //console.log("circle clicked d=" + d + " i=" + i);
     //inject rows to the table.
     let tableBody = $("#modal1body");
     if (tableBody) {
         let circleId = +$(this).attr("circleId");
         let circleIntents = intentsPerCircleId[circleId];
         let tableTitle = topics[circleId];
-        console.log('intents for circle:'+circleIntents);
+        console.log('intents for circleId:'+circleId+' are '+circleIntents);
         $("#modal1body").empty(); //cleans old table data
         // here we also need to re-write the title
         $("#model1title").empty();
@@ -126,7 +126,60 @@ function circleClicked(d, i) {
         }
     }
 }
-
+function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("modal1");
+      switching = true;
+      //Set the sorting direction to ascending:
+      dir = "asc"; 
+      /*Make a loop that will continue until
+      no switching has been done:*/
+      while (switching) {
+        //start by saying: no switching is done:
+        switching = false;
+        rows = table.getElementsByTagName("TR");
+        /*Loop through all table rows (except the
+        first, which contains table headers):*/
+        for (i = 1; i < (rows.length - 1); i++) {
+          //start by saying there should be no switching:
+          shouldSwitch = false;
+          /*Get the two elements you want to compare,
+          one from current row and one from the next:*/
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          /*check if the two rows should switch place,
+          based on the direction, asc or desc:*/
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch= true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              //if so, mark as a switch and break the loop:
+              shouldSwitch= true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /*If a switch has been marked, make the switch
+          and mark that a switch has been done:*/
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          //Each time a switch is done, increase this count by 1:
+          switchcount ++;      
+        } else {
+          /*If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again.*/
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+}
 function fill2ndModalTable(intentId) {
     let content = intentContent[intentId];
     $("#model2title").empty();
@@ -145,12 +198,12 @@ function fill2ndModalTable(intentId) {
                 let feature = subContent[j];
                 let featureId = feature["key"];
                 if (featureId) {
-                    let featureValue = +feature["value"] / content["conversations"] * 100;
-                    let progressBar = '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:' + featureValue + '%"></div> </div>';
-                    extrahtmlContent += '<p>' + featureId + ':' + features[featureId] + ' : ' + progressBar + '</p>'
+                    let featureValue  = +feature["value"]  * 100;
+                    let progressBar=  '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:'+featureValue+'%"></div> </div>';
+                    extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +progressBar+ '</p>'
                 }
             }
-            console.log(extrahtmlContent);
+            //console.log(extrahtmlContent);
 
             tableBody.append('<tr><td><h6>' + row["title"]
                 + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
