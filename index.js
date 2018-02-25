@@ -73,6 +73,54 @@ function numOfConvChanged(value) {
     });
 }
 
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+
+/**
+ * @param colorAsRGB a string of the format rgb(12, 21, 14)
+ * @returns a number between 0 -100 {number}
+ */
+function colorToDominancyValue(colorAsRGB) {
+    colorAsRGB= colorAsRGB.replace('rgb(','');
+    colorAsRGB = colorAsRGB.replace(')','');
+    let parts = colorAsRGB.split(',');
+    if (parts && parts.length == 3) {
+        let r = +parts[0];
+        let g = +parts[1];
+        let b = +parts[2];
+        let colorHex = rgbToHex(r, g, b).toLowerCase()
+        if (colorHex === evenLiterBlue) return 10;
+        else if (colorHex === litePurple) return 30;
+        else if (colorHex === liteBlue) return 50;
+        else if (colorHex === purpleBlue) return 70;
+        else if (colorHex === darkBlue) return 90;
+    }
+    return 0;
+};
+
+function numOfDominancyChanged(value) {
+    var sliderVal = +value;
+    $("circle").each(function () {
+        let circleId = $(this).attr("circleId");
+        if (circleId.startsWith('i')) {
+            let color = $(this).css("fill");
+            let colorVal = colorToDominancyValue(color);
+            if (colorVal && colorVal > sliderVal) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        }
+    });
+};
+
 function zoomed() {
     view.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
 }
