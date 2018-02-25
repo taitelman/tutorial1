@@ -257,7 +257,7 @@ function fill2ndModalTable(intentId) {
                 let featureId = feature["key"];
                 if (featureId) {
                     let featureValue  = +feature["value"]  * 100;
-                    let progressBar=  '<div class="progress"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:'+featureValue+'%"></div> </div>';
+                    let progressBar=  '<div class="progress" style="height:12px"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:10px;width:'+featureValue+'%"></div> </div>';
                     extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +progressBar+ '</p>'
                 }
             }
@@ -266,7 +266,7 @@ function fill2ndModalTable(intentId) {
             tableBody.append('<tr><td><h6>' + row["title"]
                 + '</h6><p>Dominancy:' + row["dominancy"] + '% Conversations:' + row["conversations"]+'</p>'
                 + extrahtmlContent
-                + '<p class="glyphicon glyphicon-flag">' + row["hint"]+ '</p></td></tr>');
+                + '<p><img src="./images/lightBulb.svg" height="20"> ' + row["hint"]+ '</img></p></td></tr>');
 
         }
 

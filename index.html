@@ -17,24 +17,28 @@
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
-    <div class="col-sm-4">
-        <span/>
-    </div>
-    <div class="col-sm-2">
-        <label for="numOfConversations">Number of conv:</label>
-        <input id="numOfConversations" type="range" min="0" max="100" step="10" onchange="numOfConvChanged(value)">
-    </div>
-    <div class="col-sm-2">
-        <label for="dominancy">dominancy</label>
-        <input id="dominancy" type="range" min="0" max="100" onchange="numOfDominancyChanged(value)">
-    </div>
-</nav>
 
-<div class="container">
+
+
+
+<div class="container-fluid">
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
+        <div class="col-sm-4">
+            <span/>
+        </div>
+        <div class="col-sm-2">
+            <label for="numOfConversations">Number of conv:</label>
+            <input id="numOfConversations" type="range" min="0" max="100" step="10" onchange="numOfConvChanged(value)">
+        </div>
+        <div class="col-sm-2">
+            <label for="dominancy">dominancy</label>
+            <input id="dominancy" type="range" min="0" max="100" onchange="numOfDominancyChanged(value)">
+        </div>
+    </nav>
+
     <div class="row">
-        <div class="col-sm-4" id="leftPane">
+        <div class="col-sm-3" id="leftPane">
             <table class="table table-bordered table-hover table-sm table-responsive">
                 <thead>
                 <tr>
@@ -52,7 +56,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-8" id="mainBody">
+        <div class="col-sm-*" id="mainBody">
         </div>
     </div>
     <!-- end of container -->
