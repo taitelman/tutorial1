@@ -104,17 +104,22 @@ function colorToDominancyValue(colorAsRGB) {
         let g = +parts[1];
         let b = +parts[2];
         let colorHex = rgbToHex(r, g, b).toLowerCase();
-        if (colorHex === evenLiterBlue) return 10;
-        else if (colorHex === litePurple) return 30;
-        else if (colorHex === liteBlue) return 50;
-        else if (colorHex === purpleBlue) return 70;
-        else if (colorHex === darkBlue) return 90;
-        else {
-            console.log('could not match color'+colorHex);
-        }
+        return mapColor(colorHex);
     }
     return 0;
 };
+
+function mapColor(colorHex) {
+    if (colorHex === evenLiterBlue) return 10;
+    else if (colorHex === litePurple) return 30;
+    else if (colorHex === liteBlue) return 50;
+    else if (colorHex === purpleBlue) return 70;
+    else if (colorHex === darkBlue) return 90;
+    else {
+        console.log('could not match color'+colorHex);
+        return 0;
+    }
+}
 
 function numOfDominancyChanged(value) {
     var sliderVal = +value;
@@ -137,7 +142,7 @@ function numOfDominancyChanged(value) {
         let circleId = $(this).attr("circleId");
         if (circleId.startsWith('i')) {
             let color = $(this).attr('color');
-            let colorVal = colorToDominancyValue(color);
+            let colorVal = mapColor(color);
             if (colorVal && colorVal > sliderVal) {
                 $(this).hide();
                 countHiding++;
@@ -180,7 +185,7 @@ function circleClicked(d, i) {
             let circleId = +$(this).attr("circleId");
             let circleIntents = intentsPerCircleId[circleId];
             let tableTitle = topics[circleId];
-            console.log('intents for circleId:' + circleId + ' are ' + circleIntents);
+            console.log('intents for circleId:' + circleId + ' are ' + circleIntents.length);
             $("#modal1body").empty(); //cleans old table data
             // here we also need to re-write the title
             $("#model1title").empty();
