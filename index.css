@@ -23,3 +23,8 @@ rect {
   cursor: pointer;
   background-color: #ccc;
 }
+
+#makescrollable {
+  overflow-y:scroll;
+  max-height: 530px;
+}

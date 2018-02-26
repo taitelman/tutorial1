@@ -22,7 +22,9 @@
 
 
 <div class="container-fluid">
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <!-- <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0"> -->
+
+    <nav class="navbar navbar-default navbar-fixed-top">
         <a class="navbar-brand col-sm-4 mr-0" href="#">Company name</a>
         <div class="col-sm-4">
             <span/>
@@ -38,8 +40,15 @@
     </nav>
 
     <div class="row">
-        <div class="col-sm-3" id="leftPane">
-            <table class="table table-bordered table-hover table-sm table-responsive">
+        <p><br/><br/><br/></p>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4" id="leftPane">
+            <input class="form-control" id="searchIntentInput" type="text" placeholder="Search..">
+            <div  id="makescrollable">
+            <table class="table table-bordered table-hover table-md table-responsive" id="lefttable">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -55,8 +64,10 @@
                 </tr>
                 </tbody>
             </table>
+            </div>
         </div>
-        <div class="col-sm-*" id="mainBody">
+
+        <div class="col-md-8" id="mainBody">
         </div>
     </div>
     <!-- end of container -->

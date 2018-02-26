@@ -45,10 +45,17 @@ $(document).ready(function() {
 
     fillLeftPaneIntentTable();
 
-});
+    $("#searchIntentInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#leftPaneTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
 
-var width = self.frameElement ? 960 : innerWidth,
-    height = self.frameElement ? 500 : innerHeight;
+}); //eof document ready
+
+var width = self.frameElement ? 800 : innerWidth;
+var height = self.frameElement ? 500 : innerHeight;
 
 
 // a method to show/hide circles in the main graph according to their radius property
@@ -95,18 +102,22 @@ function colorToDominancyValue(colorAsRGB) {
         let r = +parts[0];
         let g = +parts[1];
         let b = +parts[2];
-        let colorHex = rgbToHex(r, g, b).toLowerCase()
+        let colorHex = rgbToHex(r, g, b).toLowerCase();
         if (colorHex === evenLiterBlue) return 10;
         else if (colorHex === litePurple) return 30;
         else if (colorHex === liteBlue) return 50;
         else if (colorHex === purpleBlue) return 70;
         else if (colorHex === darkBlue) return 90;
+        else {
+            console.log('could not match color'+colorHex);
+        }
     }
     return 0;
 };
 
 function numOfDominancyChanged(value) {
     var sliderVal = +value;
+    let countHiding =0,showing=0;
     $("circle").each(function () {
         let circleId = $(this).attr("circleId");
         if (circleId.startsWith('i')) {
@@ -114,11 +125,23 @@ function numOfDominancyChanged(value) {
             let colorVal = colorToDominancyValue(color);
             if (colorVal && colorVal > sliderVal) {
                 $(this).hide();
+                countHiding++;
             } else {
                 $(this).show();
+                showing++;
             }
         }
     });
+    // $("text").each(function () {
+    //     var r = +$(this).attr("r");
+    //     var sliderVal = +value;
+    //     if (r && r < sliderVal) {
+    //         $(this).hide();
+    //     } else {
+    //         $(this).show();
+    //     }
+    // });
+    console.log('set dominancy to '+value+' hid '+countHiding +' out of ' + (showing+countHiding) );
 };
 
 function zoomed() {
@@ -257,7 +280,7 @@ function fill2ndModalTable(intentId) {
                 let featureId = feature["key"];
                 if (featureId) {
                     let featureValue  = +feature["value"]  * 100;
-                    let progressBar=  '<div class="progress" style="height:12px"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:10px;width:'+featureValue+'%"></div> </div>';
+                    let progressBar=  '<div class="progress" style="height: 12px;"> <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="height:10px;width:'+featureValue+'%"></div> </div>';
                     extrahtmlContent += '<p>'+featureId+ ':' + features[featureId]+ ' : ' +progressBar+ '</p>'
                 }
             }
