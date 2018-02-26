@@ -23,24 +23,25 @@ $(document).ready(function() {
         })
         .on("click", circleClicked)
         .style("fill", function (d, i) {
-            return colors[i];
+            return d[5];
         });
 
     // // here I take the labels and try to place them in middle of circle by reading array
-    view.selectAll("text").data(labels).enter().append("text")
-        .attr("x", function (d, i) {
-            return (d[0]);
+    view.selectAll("text").data(circles).enter().append("text")
+        .attr("circleId", function (d, i) {
+            return d[0];
         })
-        .attr("y", function (d, i) {
+        .attr("x", function (d, i) {
             return (d[1]);
         })
-        .attr("style", function (d, i) {
-            return "font-family:Times;font-size:" + (d[2]/3) + "px;fill:white";
+        .attr("y", function (d, i) {
+            return (d[2]);
         })
-        .attr("r",function (d,i) { return d[2]; })
-        .html(function (d, i) {
-            return d[3];
-        });
+        .attr("style", function (d, i) {
+            return "font-family:Times;font-size:" + (d[3]/3) + "px;fill:white";
+        }).attr('color' ,function (d,i) { return d[5]  ;  })
+        .attr("r",function (d,i) { return d[3]; })
+        .html(function (d, i) { return d[4]; });
 
 
     fillLeftPaneIntentTable();
@@ -132,15 +133,20 @@ function numOfDominancyChanged(value) {
             }
         }
     });
-    // $("text").each(function () {
-    //     var r = +$(this).attr("r");
-    //     var sliderVal = +value;
-    //     if (r && r < sliderVal) {
-    //         $(this).hide();
-    //     } else {
-    //         $(this).show();
-    //     }
-    // });
+    $("text").each(function () {
+        let circleId = $(this).attr("circleId");
+        if (circleId.startsWith('i')) {
+            let color = $(this).attr('color');
+            let colorVal = colorToDominancyValue(color);
+            if (colorVal && colorVal > sliderVal) {
+                $(this).hide();
+                countHiding++;
+            } else {
+                $(this).show();
+                showing++;
+            }
+        }
+    });
     console.log('set dominancy to '+value+' hid '+countHiding +' out of ' + (showing+countHiding) );
 };
 
