@@ -129,7 +129,7 @@ function numOfDominancyChanged(value) {
         if (circleId.startsWith('i')) {
             let color = $(this).css("fill");
             let colorVal = colorToDominancyValue(color);
-            if (colorVal && colorVal > sliderVal) {
+            if (colorVal && colorVal < sliderVal) {
                 $(this).hide();
                 countHiding++;
             } else {
@@ -143,7 +143,7 @@ function numOfDominancyChanged(value) {
         if (circleId.startsWith('i')) {
             let color = $(this).attr('color');
             let colorVal = mapColor(color);
-            if (colorVal && colorVal > sliderVal) {
+            if (colorVal && colorVal < sliderVal) {
                 $(this).hide();
                 countHiding++;
             } else {
