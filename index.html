@@ -35,7 +35,7 @@
         </div>
         <div class="col-sm-2">
             <label for="dominancy">dominancy</label>
-            <input id="dominancy" type="range" min="0" max="100" onchange="numOfDominancyChanged(value)">
+            <input id="dominancy" type="range"  min="0" max="100" onchange="numOfDominancyChanged(value)">
         </div>
     </nav>
 
@@ -45,10 +45,10 @@
 
     <div class="row">
 
-        <div class="col-md-4" id="leftPane">
+        <div class="col-md-3" id="leftPane">
             <input class="form-control" id="searchIntentInput" type="text" placeholder="Search..">
             <div  id="makescrollable">
-            <table class="table table-bordered table-hover table-md table-responsive sortable" data-toggle="table" id="lefttable">
+            <table class="table table-hover table-condensed table-md table-responsive sortable" data-toggle="table" id="lefttable">
                 <thead>
                 <tr>
                     <th data-sortable="true">#</th>
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="col-md-8" id="mainBody">
+        <div class="col-md-9" id="mainBody">
         </div>
     </div>
     <!-- end of container -->
@@ -120,7 +120,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered table-hover table-sm table-responsive">
+                <table class="table table-condensed table-hover table-sm table-responsive">
                     <tbody id="modal2body">
 
                     </tbody>

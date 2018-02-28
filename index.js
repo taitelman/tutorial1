@@ -38,7 +38,14 @@ $(document).ready(function() {
             return (d[2]);
         })
         .attr("style", function (d, i) {
-            return "font-family:Times;font-size:" + (d[3]/3) + "px;fill:white";
+            // here we want to make sure text is visible over circles
+            // so we paint light circle with dark text font (and vice verse)
+            let fontColor='DarkKhaki;';
+            let circleColor = mapColor(d[5]);
+            if (circleColor <= 50) {
+                fontColor = 'black;';
+            }
+            return "font-size:" + (d[3]/3) + "px;fill:"+fontColor;
         }).attr('color' ,function (d,i) { return d[5]  ;  })
         .attr("r",function (d,i) { return d[3]; })
         .html(function (d, i) { return d[4]; });
@@ -53,11 +60,21 @@ $(document).ready(function() {
         });
     });
 
+    //$(".view").attr("transform", "translate([-470.0,-280.0]) scale(2.378)");
+
+
+    // $( "#dominancy" ).slider({
+    //     value: 0,
+    //     min: 0,
+    //     max: 100
+    // });
+
 }); //eof document ready
 
 var width = self.frameElement ? 800 : innerWidth;
 var height = self.frameElement ? 500 : innerHeight;
-
+var currentZoomFactor = 0;
+var MIN_ZOOM_FACTOR_TO_SHOW_TEXT =7 ;
 
 // a method to show/hide circles in the main graph according to their radius property
 function numOfConvChanged(value) {
@@ -110,7 +127,10 @@ function colorToDominancyValue(colorAsRGB) {
 };
 
 function mapColor(colorHex) {
-    if (colorHex === evenLiterBlue) return 10;
+    if (colorHex === lighterBlue) return 10;
+    else if (colorHex === lightOrange) return 22;
+    else if (colorHex === lightBrown) return 25;
+    else if (colorHex === lighterOrange) return 27;
     else if (colorHex === litePurple) return 30;
     else if (colorHex === liteBlue) return 50;
     else if (colorHex === purpleBlue) return 70;
@@ -140,6 +160,7 @@ function numOfDominancyChanged(value) {
     });
     $("text").each(function () {
         let circleId = $(this).attr("circleId");
+        //for intents we decide whether to show their topic , based on their color.
         if (circleId.startsWith('i')) {
             let color = $(this).attr('color');
             let colorVal = mapColor(color);
@@ -156,7 +177,20 @@ function numOfDominancyChanged(value) {
 };
 
 function zoomed() {
+    currentZoomFactor = d3.event.scale;
     view.attr("transform", "translate(" + d3.event.translate + ") scale(" + d3.event.scale + ")");
+    $("text").each(function () {
+        let fontSizeInPX =$(this).css('font-size');
+        let fontAsint = parseFloat(fontSizeInPX,10);
+        let zoomedFont = fontAsint * currentZoomFactor;
+        //here , when zooming we show more and more text titles as we zoon.
+        // right now the zoom factor to show is golden 7
+        if (zoomedFont > MIN_ZOOM_FACTOR_TO_SHOW_TEXT) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
 }
 
 function nozoom() {
@@ -320,14 +354,12 @@ var svg = d3.select("#mainBody")
 
 var g = svg.append("g").call(zoom);
 
+var viewBackgroundColor = 'DarkGray';// "#f5f7fa";
 g.append("rect")
     .attr("width", width)
     .attr("height", height)
-    .attr("style", "fill:blue;stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9")
+    .attr("style", 'fill:'+viewBackgroundColor+';stroke-width:4;stroke:rgb(0,0,0);fill-opacity:0.1;stroke-opacity:0.9');
 ;
 
 var view = g.append("g")
     .attr("class", "view");
-
-
-
